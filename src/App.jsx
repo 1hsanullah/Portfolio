@@ -13,7 +13,7 @@ function App() {
         <div className="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between py-20">
           <div className="md:w-1/2 text-center md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Hi, I'm <span className="text-blue-600 dark:text-blue-400">Your Name</span>
+              Hi, I'm <span className="text-blue-600 dark:text-blue-400">Ihsanullah Sadiq</span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
               A passionate web developer building amazing digital experiences.
@@ -26,7 +26,7 @@ function App() {
           <div className="md:w-1/2 mb-8 md:mb-0">
             <div className="w-64 h-64 mx-auto bg-gray-300 rounded-full overflow-hidden">
               <img
-                src="https://via.placeholder.com/256"
+                src="src/assets/profile_img.jpg"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />

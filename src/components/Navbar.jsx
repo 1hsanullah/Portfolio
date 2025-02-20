@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="fixed w-full top-0 z-10 bg-white dark:bg-gray-900 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <h1 className="text-xl font-bold">Your Name</h1>
+          <h1 className="text-xl font-bold">Ihsanullah Sadiq</h1>
           
           <div className="hidden md:flex space-x-8">
             <a href="#home" className="hover:text-blue-600 dark:hover:text-blue-400">Home</a>
