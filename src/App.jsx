@@ -2,6 +2,9 @@ import Navbar from './components/Navbar'
 import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
+import Education from './components/Education'
+import Experience from './components/Experience'
+import Skills from './components/Skills'
 
 function App() {
   return (
@@ -36,7 +39,10 @@ function App() {
       </section>
 
       <About />
+      <Education />
+      <Experience />
       <Projects />
+      <Skills />
       <Contact />
     </div>
   )
