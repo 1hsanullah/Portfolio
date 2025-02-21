@@ -2,7 +2,7 @@ import AnimatedSection from './AnimatedSection';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 px-4">
+    <section id="about" className="py-20 px-4 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto">
         <AnimatedSection>
           <h2 className="text-3xl font-bold mb-8 text-center">About Me</h2>
