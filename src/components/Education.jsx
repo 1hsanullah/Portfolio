@@ -36,12 +36,20 @@ const educationData = [
 const Education = () => {
   return (
     <section id="education" className="py-20 px-4">
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-6xl">
         <AnimatedSection>
           <h2 className="text-3xl font-bold mb-12 text-center">Education</h2>
-          <div className="space-y-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {educationData.map((education, index) => (
-              <TimelineItem key={index} {...education} />
+              <div 
+                key={index}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <TimelineItem 
+                  {...education}
+                  className="!mb-0"
+                />
+              </div>
             ))}
           </div>
         </AnimatedSection>
