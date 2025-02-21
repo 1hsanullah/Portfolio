@@ -1,18 +1,21 @@
 import AnimatedSection from './AnimatedSection';
 import { motion } from 'framer-motion';
+import scg from '../assets/icons/scg.jpg';
+import echo from '../assets/icons/echo.jpg';
+import cifar from '../assets/icons/cifar10.jpg';
 
 const projects = [
   {
     title: "Deep Learning Model for CIFAR-10 Image Classification",
     description: "Developed a CNN to classify CIFAR-10 dataset images, achieving 98.08% validation accuracy using custom loss functions and Adam optimization.",
-    image: "https://via.placeholder.com/400x300?text=CIFAR-10+Classification",
+    image: cifar,
     github: "https://github.com/yourusername/cifar10-classification",
     technologies: ["Python", "PyTorch", "Matplotlib", "scikit-learn"]
   },
   {
     title: "Eye-Controlled Peripherals with Speech Detection",
     description: "Built a desktop application enabling eye-controlled cursor movement and speech-to-text input for improved accessibility.",
-    image: "https://via.placeholder.com/400x300?text=Eye+Control+System",
+    image: echo,
     github: "https://github.com/yourusername/eye-control-system",
     technologies: ["Python", "OpenCV", "MediaPipe", "PyAutoGUI", "SpeechRecognition"]
   },

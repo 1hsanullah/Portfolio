@@ -5,21 +5,6 @@ import arkLogo from '../assets/logos/arkacton.png'; // Add your sixth form logo
 
 const educationData = [
   {
-    logo: qmulLogo,
-    title: "BSc Computer Science",
-    subtitle: "Queen Mary University of London",
-    date: "September 2021 - July 2024",
-    description: "First Class Honours",
-    items: [
-      "Neural Networks and Deep Learning",
-      "Web Programming",
-      "Artificial Intelligence",
-      "Algorithms & Data Structures",
-      "Software Engineering",
-      "Database Systems"
-    ]
-  },
-  {
     logo: arkLogo,
     title: "A-Levels",
     subtitle: "Ark Acton Sixth Form",
@@ -29,6 +14,21 @@ const educationData = [
       "Further Mathematics – A",
       "Mathematics – A",
       "Chemistry – B"
+    ]
+  },
+  {
+    logo: qmulLogo,
+    title: "BSc Computer Science",
+    subtitle: "Queen Mary University of London",
+    date: "September 2021 - July 2024",
+    description: "Grade: First Class Honours",
+    items: [
+      "Neural Networks and Deep Learning",
+      "Web Programming",
+      "Object-Oriented Programming",
+      "Algorithms & Data Structures",
+      "Software Engineering",
+      "Database Systems"
     ]
   }
 ];
