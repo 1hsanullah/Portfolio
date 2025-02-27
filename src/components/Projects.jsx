@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import scg from '../assets/icons/scg.jpg';
 import echo from '../assets/icons/echo.jpg';
 import cifar from '../assets/icons/cifar10.jpg';
+import ec from '../assets/icons/ec.jpg';
 
 const projects = [
   {
@@ -16,21 +17,21 @@ const projects = [
     title: "Eye-Controlled Peripherals with Speech Detection",
     description: "Built a desktop application enabling eye-controlled cursor movement and speech-to-text input for improved accessibility.",
     image: echo,
-    github: "https://github.com/yourusername/eye-control-system",
+    github: "https://github.com/1hsanullah/EchoVision",
     technologies: ["Python", "OpenCV", "MediaPipe", "PyAutoGUI", "SpeechRecognition"]
   },
   {
-    title: "Online Newspaper Web Application",
+    title: "Last Hope - 3D Survival Game",
     description: "Developed a cutting-edge online newspaper application featuring personalized news feeds, dynamic content updates, and an interactive comment system.",
-    image: "https://via.placeholder.com/400x300?text=Online+Newspaper",
-    github: "https://github.com/yourusername/online-newspaper",
+    image: scg,
+    github: "https://github.com/SapezB/Survival-Craft-Game",
     technologies: ["Django", "Python", "Vue", "Vite", "Pinia", "TypeScript"]
   },
   {
     title: "EC-Ticket-App",
     description: "Built an event ticketing application with a user-friendly interface for seamless ticket purchasing and real-time event updates.",
-    image: "https://via.placeholder.com/400x300?text=Event+Ticketing",
-    github: "https://github.com/yourusername/ec-ticket-app",
+    image: ec,
+    github: "https://github.com/1hsanullah/EC-Ticket-App",
     technologies: ["Flask", "SQLite", "HTML", "CSS", "JavaScript"]
   }
 ];
