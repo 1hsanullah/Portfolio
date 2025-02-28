@@ -45,10 +45,6 @@ To deploy your own version:
 3. Import your repository
 4. Deploy!
 
-## 📝 License
-
-This project is [MIT](LICENSE) licensed.
-
 ## 👤 Author
 
 **Ihsanullah Sadiq**
