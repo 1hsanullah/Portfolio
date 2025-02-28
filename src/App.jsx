@@ -10,6 +10,7 @@ import githubIcon from './assets/socials/github.png';
 import linkedinIcon from './assets/socials/linkedin.png';
 import gmailIcon from './assets/socials/gmail.png';
 import phoneIcon from './assets/socials/phone.png';
+import profileImage from './assets/profile_img.jpg';
 
 function App() {
   const scrollToContact = () => {
@@ -70,7 +71,7 @@ function App() {
               transition={{ type: "tween", duration: 0.3 }}
             >
               <motion.img
-                src="src/assets/profile_img.jpg"
+                src={profileImage}
                 alt="Profile"
                 className="w-full h-full object-cover"
                 whileHover={{ scale: 1.3 }}
