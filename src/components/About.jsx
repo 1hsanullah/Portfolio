@@ -7,14 +7,13 @@ const About = () => {
         <AnimatedSection>
           <h2 className="text-3xl font-bold mb-8 text-center">About Me</h2>
           <div className="max-w-3xl mx-auto">
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
-              I'm a passionate web developer with a strong foundation in modern technologies.
-              My journey in web development started with a curiosity about how things work on the internet,
-              and it has evolved into a professional career building robust and scalable applications.
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 text-center">
+              I'm a passionate Software Developer with a strong foundation in modern technologies.
+              My journey in software development began with a curiosity for how things work,
+              which grew into a career focused on building efficient and scalable applications.
             </p>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-              or sharing my knowledge through technical blog posts.
+            <p className="text-lg text-gray-600 dark:text-gray-400 text-center">
+              When I'm not coding, I enjoy learning about emerging technologies, optimizing systems, and refining my skills through hands-on projects.
             </p>
           </div>
         </AnimatedSection>

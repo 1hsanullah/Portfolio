@@ -22,10 +22,10 @@ const projects = [
   },
   {
     title: "Last Hope - 3D Survival Game",
-    description: "Developed a cutting-edge online newspaper application featuring personalized news feeds, dynamic content updates, and an interactive comment system.",
+    description: "Created a Unity-based survival game, enhancing gameplay with advanced mechanics and dynamic environments using C#.",
     image: scg,
     github: "https://github.com/SapezB/Survival-Craft-Game",
-    technologies: ["Django", "Python", "Vue", "Vite", "Pinia", "TypeScript"]
+    technologies: ["C#", "Unity", "Visual Studio", "Blender"]
   },
   {
     title: "EC-Ticket-App",
@@ -42,7 +42,7 @@ const Projects = () => {
       <div className="container mx-auto">
         <AnimatedSection>
           <h2 className="text-3xl font-bold mb-12 text-center">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-9">
             {projects.map((project, index) => (
               <motion.div
                 key={index}

@@ -75,7 +75,7 @@ const Experience = () => {
               <TimelineItem 
                 key={index} 
                 {...experience}
-                className="hover:shadow-lg transition-shadow duration-300"
+                className="hover: transition-shadow duration-300"
               />
             ))}
           </div>

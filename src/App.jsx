@@ -52,7 +52,7 @@ function App() {
               Hi, I'm <span className="text-blue-600 dark:text-blue-400">Ihsanullah Sadiq</span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-              A passionate web developer building amazing digital experiences.
+              A Graduate developer that enjoys building amazing digital experiences.
             </p>
             <button 
               onClick={scrollToContact}
