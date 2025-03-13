@@ -3,16 +3,35 @@ import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/out
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  // Initialize state from localStorage or use system preference as fallback
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check if we have a saved preference
+    const savedMode = localStorage.getItem('darkMode');
+    
+    if (savedMode !== null) {
+      return savedMode === 'true';
+    } else {
+      // Use system preference as fallback
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+  });
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Apply the theme when component mounts and when darkMode changes
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-  }, []);
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', darkMode.toString());
+  }, [darkMode]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
   };
 
   const menuItems = [
@@ -52,6 +71,7 @@ const Navbar = () => {
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {darkMode ? (
                 <SunIcon className="h-6 w-6" />
@@ -63,6 +83,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
