@@ -21,9 +21,15 @@ const skillsData = {
 };
 
 const SkillCategory = ({ title, skills, isCertification = false }) => (
-  <div className="mb-8">
-    <h3 className="text-xl font-bold mb-4">{title}</h3>
-    <div className="flex flex-wrap gap-3">
+  <motion.div 
+    className="mb-12"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  >
+    <h3 className="text-2xl font-bold mb-6 text-apple-gray-800 dark:text-white">{title}</h3>
+    <div className="flex flex-wrap gap-4">
       {isCertification ? (
         // Render certification links
         skills.map((cert, index) => (
@@ -32,10 +38,12 @@ const SkillCategory = ({ title, skills, isCertification = false }) => (
             href={cert.link}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            className="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ delay: index * 0.1 }}
+            className="glass-morphism px-6 py-4 text-apple-blue font-medium rounded-2xl card-hover border border-apple-blue/20 hover:border-apple-blue/40 transition-all duration-300"
           >
             {cert.name}
           </motion.a>
@@ -45,25 +53,42 @@ const SkillCategory = ({ title, skills, isCertification = false }) => (
         skills.map((skill, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            className="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg shadow-sm"
+            whileHover={{ scale: 1.05, y: -2 }}
+            transition={{ delay: index * 0.05 }}
+            className="glass-morphism px-5 py-3 text-apple-gray-700 dark:text-apple-gray-200 font-medium rounded-2xl card-hover"
           >
             {skill}
           </motion.div>
         ))
       )}
     </div>
-  </div>
+  </motion.div>
 );
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto max-w-4xl">
+    <section id="skills" className="relative section-spacing">
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-apple-gray-50 to-white dark:from-apple-gray-900 dark:via-apple-gray-800 dark:to-apple-gray-900"></div>
+      
+      <div className="relative container mx-auto max-w-5xl container-padding">
         <AnimatedSection>
-          <h2 className="text-3xl font-bold mb-12 text-center">Skills</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+              <span className="gradient-text">Skills</span>
+            </h2>
+            <p className="text-xl text-apple-gray-600 dark:text-apple-gray-300 max-w-2xl mx-auto">
+              Technologies and tools I use to bring ideas to life
+            </p>
+          </motion.div>
+          
           {Object.entries(skillsData).map(([category, skills]) => (
             <SkillCategory 
               key={category} 

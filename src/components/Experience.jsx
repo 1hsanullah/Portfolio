@@ -1,11 +1,26 @@
 import AnimatedSection from './AnimatedSection';
 import TimelineItem from './common/TimelineItem';
+import { motion } from 'framer-motion';
 import gdscLogo from '../assets/logos/GDSC.jpeg';
 import qmulLogo from '../assets/logos/qmul.jpeg';
 import diamondLogo from '../assets/logos/DiamondBuildersLogo.jpeg';
 import amwLogo from '../assets/logos/amwelfare.png';
 
 const experienceData = [
+  {
+    logo: '/src/assets/logos/differentia_consulting.png', // You'll need to add this logo
+    title: "Software Engineer",
+    subtitle: "Differentia Consulting",
+    date: "Present",
+    location: "London, UK",
+    description: "Full-time software engineering role at innovative consulting firm",
+    items: [
+      "Developing scalable web applications using modern technologies",
+      "Collaborating with cross-functional teams to deliver client solutions",
+      "Implementing best practices in software architecture and development",
+      "Contributing to code reviews and technical documentation"
+    ]
+  },
   {
     logo: gdscLogo,
     title: "Assistant",
@@ -66,17 +81,37 @@ const experienceData = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 px-4 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto max-w-4xl">
+    <section id="experience" className="relative section-spacing bg-apple-gray-100/50 dark:bg-apple-gray-800/50">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-apple-gray-50/30 to-transparent dark:via-apple-gray-900/30"></div>
+      
+      <div className="relative container mx-auto max-w-5xl container-padding">
         <AnimatedSection>
-          <h2 className="text-3xl font-bold mb-12 text-center">Experience</h2>
-          <div className="space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+              <span className="gradient-text">Experience</span>
+            </h2>
+            <p className="text-xl text-apple-gray-600 dark:text-apple-gray-300 max-w-2xl mx-auto">
+              My professional journey in software development and technology
+            </p>
+          </motion.div>
+          
+          <div className="space-y-8">
             {experienceData.map((experience, index) => (
-              <TimelineItem 
-                key={index} 
-                {...experience}
-                className="hover: transition-shadow duration-300"
-              />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <TimelineItem {...experience} />
+              </motion.div>
             ))}
           </div>
         </AnimatedSection>

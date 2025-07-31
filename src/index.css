@@ -4,14 +4,40 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-padding-top: 80px;
 }
 
 body {
-  @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+  @apply bg-apple-gray-50 dark:bg-apple-gray-900 text-apple-gray-700 dark:text-apple-gray-100 font-apple;
   margin: 0;
   padding: 0;
+  line-height: 1.6;
 }
 
 #root {
   min-height: 100vh;
+}
+
+@layer components {
+  .glass-morphism {
+    @apply bg-white/70 dark:bg-apple-gray-800/70 backdrop-blur-apple border border-white/20 dark:border-apple-gray-700/20;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-apple-blue to-blue-600 bg-clip-text text-transparent;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-apple-hover dark:hover:shadow-apple-dark-hover transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .section-spacing {
+    @apply py-24 lg:py-32;
+  }
+  
+  .container-padding {
+    @apply px-6 lg:px-8;
+  }
 }
