@@ -1,58 +1,45 @@
-# Personal Portfolio Website
+# Ihsanullah Sadiq | Portfolio
 
-A modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion.
+Personal portfolio of a London-based software engineer, designed as an "engineering terminal meets editorial" site: big Swiss-style type, a live ASCII render engine, and a shell you can actually type into.
 
-## 🔗 Live Demo
+[View live website](https://portfolio-alpha-lime-62.vercel.app/)
 
-[View Live Website](https://portfolio-alpha-lime-62.vercel.app/#home)
+## Highlights
 
-## 🌟 Features
+- **Boot sequence**: a terminal-style preloader that counts to 100% and wipes away (once per visit; skipped for reduced-motion users).
+- **Crosshair cursor**: a blend-mode cursor with a live coordinate readout that grows into labels (`Open ↗`, `Drag`, `Decode`, `Copy`) over interactive elements.
+- **ASCII torus**: a real-time port of `donut.c` drawn to canvas in the hero. Move the mouse to tilt it, drag to spin it.
+- **Scatter portrait**: a small ASCII portrait whose characters scatter away from the cursor and spring back.
+- **Selected work**: seven featured projects, public and private. Hovering one opens a floating terminal that types a short session for that repo; private repos answer `fatal: repository is private`. Smaller and older work lives in an `ls ~/archive` list below.
+- **`git log` experience**: roles rendered as commits on a branch graph, each expandable.
+- **Interactive shell**: `help`, `projects`, `neofetch`, `cat about.txt`, `goto contact`, `theme`… and a few hidden ones (try `sudo hire-me`).
+- **Motion everywhere, politely**: Lenis smooth scrolling, masked text reveals, scroll-linked word highlighting, a scroll-velocity marquee, magnetic buttons, text scrambles. All of it respects `prefers-reduced-motion`.
+- **Dark / light themes**, persisted per visitor, and fully responsive down to small phones.
 
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Dark Mode**: Elegant dark/light mode toggle
-- **Smooth Animations**: Page transitions and hover effects using Framer Motion
-- **Contact Form**: Functional contact form using EmailJS
-- **Interactive UI**: Engaging user interface with smooth scrolling and animations
-- **Modern Tech Stack**: Built with React, Tailwind CSS, and other modern tools
+## Stack
 
-## 🛠️ Technologies Used
+React 18 · Vite · Framer Motion · Lenis · EmailJS · Geist, Geist Mono & Instrument Serif (self-hosted via Fontsource). Plain CSS with design tokens and no UI framework.
 
-- React.js
-- Tailwind CSS
-- Framer Motion
-- EmailJS
-- Vite
-- Hero Icons
+## Editing content
 
-## 🎨 Features & Sections
+Everything the site says lives in [`src/data/content.js`](src/data/content.js): profile, about copy, stats, featured projects, the archive, experience, education, skills and certifications.
 
-- **Navigation Bar**: Responsive navbar with dark mode toggle
-- **Hero Section**: Introduction with animated profile image
-- **About**: Personal introduction and background
-- **Education**: Academic background and achievements
-- **Experience**: Work experience and internships
-- **Projects**: Showcase of personal and professional projects
-- **Skills**: Technical skills and certifications
-- **Contact**: Contact form with EmailJS integration
+- **Résumé:** drop a PDF into `public/` and set `profile.resume` to e.g. `'/resume.pdf'` and a download link appears in the contact section.
+- **Projects:** set `visibility` to `'public'` and add a `url` to link a project; private projects show their description only. `tree` and `commits` feed the hover terminal.
 
-## 🚀 Deployment
+## Development
 
-The site is deployed on Vercel. Any push to the main branch automatically triggers a new deployment.
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # production build into dist/
+npm run lint
+```
 
-To deploy your own version:
-1. Fork this repository
-2. Sign up on [Vercel](https://vercel.com)
-3. Import your repository
-4. Deploy!
+## Deployment
 
-## 👤 Author
+Deployed on Vercel; every push to `main` triggers a new deployment.
 
-**Ihsanullah Sadiq**
-- LinkedIn: [Ihsanullah Sadiq](https://www.linkedin.com/in/ihsanullah-sadiq-624a5b201/)
-- GitHub: [@1hsanullah](https://github.com/1hsanullah)
+## Author
 
-## 🙏 Acknowledgments
-
-- Icons from [Hero Icons](https://heroicons.com/)
-- Animation library: [Framer Motion](https://www.framer.com/motion/)
-- CSS Framework: [Tailwind CSS](https://tailwindcss.com/)
+**Ihsanullah Sadiq** · [LinkedIn](https://www.linkedin.com/in/ihsanullah-sadiq-624a5b201/) · [GitHub](https://github.com/1hsanullah)
