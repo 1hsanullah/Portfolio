@@ -1,15 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="src/assets/socials/tab.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <meta name="keywords" content="web developer, portfolio, react, javascript" />
+    <title>Ihsanullah Sadiq | Software Engineer</title>
+    <meta name="description" content="Ihsanullah Sadiq is a London-based software engineer building reliable software and thoughtful digital experiences, from neural networks to full-stack apps." />
     <meta name="author" content="Ihsanullah Sadiq" />
-    <meta property="og:title" content="Ihsanullah Sadiq | Portfolio" />
-    <meta property="og:description" content="Portfolio website of Ihsanullah Sadiq" />
-    <meta property="og:image" content="src/assets/socials/tab.png" />
+    <meta name="theme-color" content="#0c0c0b" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ihsanullah Sadiq | Software Engineer" />
+    <meta property="og:description" content="Portfolio of Ihsanullah Sadiq, software engineer in London." />
+    <script>
+      // apply the saved theme before first paint to avoid a flash
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
