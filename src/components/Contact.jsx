@@ -1,159 +1,126 @@
-import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import AnimatedSection from './AnimatedSection';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { profile } from '../data/content';
+import Magnetic from './ui/Magnetic';
+import { FadeUp, MaskReveal } from './ui/Reveal';
+import { easeOut } from '../lib/motion';
+import SectionHead from './ui/SectionHead';
 
-const Contact = () => {
-  const form = useRef();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+const EMAILJS = { service: 'service_4yeek4k', template: 'template_w4amtft', key: '02T4vyG4D05x_-h3G' };
 
-  const handleSubmit = (e) => {
+const fields = [
+  { name: 'from_name', label: "What's your name?", type: 'text', placeholder: 'Jane Doe', autoComplete: 'name' },
+  { name: 'reply_to', label: 'Your email', type: 'email', placeholder: 'jane@company.com', autoComplete: 'email' },
+  { name: 'message', label: 'Your message', textarea: true, placeholder: 'Hi Ihsan, we are hiring for…' },
+];
+
+export default function Contact() {
+  const form = useRef(null);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [copied, setCopied] = useState(false);
+
+  const submit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: '', message: '' });
-
-    emailjs.sendForm(
-      'service_4yeek4k', // Your Service ID
-      'template_w4amtft', // Your Template ID
-      form.current,
-      '02T4vyG4D05x_-h3G' // Your Public Key
-    )
-      .then((result) => {
-        setSubmitStatus({
-          type: 'success',
-          message: 'Message sent successfully! I will get back to you soon.'
-        });
+    setStatus('sending');
+    emailjs
+      .sendForm(EMAILJS.service, EMAILJS.template, form.current, EMAILJS.key)
+      .then(() => {
+        setStatus('sent');
         form.current.reset();
       })
-      .catch((error) => {
-        setSubmitStatus({
-          type: 'error',
-          message: 'Failed to send message. Please try again.'
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+      .catch(() => setStatus('error'));
+  };
+
+  const copy = async (e) => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      e.preventDefault();
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* fall through to the mailto link */
+    }
   };
 
   return (
-    <section id="contact" className="relative section-spacing bg-apple-gray-100/50 dark:bg-apple-gray-800/50">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-apple-gray-50/30 to-transparent dark:via-apple-gray-900/30"></div>
-      
-      <div className="relative container mx-auto max-w-3xl container-padding">
-        <AnimatedSection>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-              <span className="gradient-text">Get in Touch</span>
-            </h2>
-            <p className="text-xl text-apple-gray-600 dark:text-apple-gray-300 max-w-2xl mx-auto">
-              Let's discuss how we can work together to bring your ideas to life
-            </p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass-morphism rounded-3xl p-8 lg:p-12"
-          >
-            <form ref={form} onSubmit={handleSubmit} className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <label htmlFor="from_name" className="block text-lg font-semibold mb-3 text-apple-gray-700 dark:text-apple-gray-200">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="from_name"
-                  name="from_name"
-                  className="w-full px-6 py-4 rounded-2xl border border-apple-gray-200 dark:border-apple-gray-600 bg-white/80 dark:bg-apple-gray-800/80 focus:outline-none focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-300"
-                  required
-                />
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <label htmlFor="reply_to" className="block text-lg font-semibold mb-3 text-apple-gray-700 dark:text-apple-gray-200">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="reply_to"
-                  name="reply_to"
-                  className="w-full px-6 py-4 rounded-2xl border border-apple-gray-200 dark:border-apple-gray-600 bg-white/80 dark:bg-apple-gray-800/80 focus:outline-none focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-300"
-                  required
-                />
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <label htmlFor="message" className="block text-lg font-semibold mb-3 text-apple-gray-700 dark:text-apple-gray-200">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  className="w-full px-6 py-4 rounded-2xl border border-apple-gray-200 dark:border-apple-gray-600 bg-white/80 dark:bg-apple-gray-800/80 focus:outline-none focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-300 resize-none"
-                  required
-                ></textarea>
-              </motion.div>
+    <section id="contact" className="section contact">
+      <SectionHead index="07" label="Contact" meta="say hello" />
 
-              {/* Status Message */}
-              {submitStatus.message && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className={`p-6 rounded-2xl ${
-                    submitStatus.type === 'success' 
-                      ? 'bg-green-100 text-green-700 dark:bg-green-800/50 dark:text-green-200 border border-green-200 dark:border-green-700' 
-                      : 'bg-red-100 text-red-700 dark:bg-red-800/50 dark:text-red-200 border border-red-200 dark:border-red-700'
-                  }`}
+      <h2 className="contact__title">
+        <MaskReveal>Let&apos;s build</MaskReveal>
+        <MaskReveal delay={0.08}>
+          <em>something</em> good.
+        </MaskReveal>
+      </h2>
+
+      <div className="contact__grid">
+        <FadeUp className="contact__side">
+          <p className="contact__lede">
+            Hiring, collaborating, or just want to talk shop? My inbox is open, so drop a note here or email me directly.
+          </p>
+          <a href={`mailto:${profile.email}`} className="contact__email" onClick={copy} data-cursor={copied ? 'Copied ✓' : 'Copy'}>
+            {profile.email}
+            <AnimatePresence>
+              {copied && (
+                <motion.span
+                  className="contact__copied mono accent"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
                 >
-                  {submitStatus.message}
-                </motion.div>
+                  copied to clipboard
+                </motion.span>
               )}
+            </AnimatePresence>
+          </a>
+          {profile.resume && (
+            <a href={profile.resume} className="contact__resume mono" download data-cursor="Download">
+              ↓ Download résumé
+            </a>
+          )}
+        </FadeUp>
 
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className={`w-full bg-apple-blue text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-apple hover:shadow-apple-hover transition-all duration-300 ${
-                  isSubmitting 
-                    ? 'opacity-75 cursor-not-allowed' 
-                    : 'hover:bg-blue-700'
-                }`}
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </motion.button>
-            </form>
-          </motion.div>
-        </AnimatedSection>
+        <FadeUp delay={0.1}>
+          <form ref={form} onSubmit={submit} className="form">
+            {fields.map((f, i) => (
+              <div className="field" key={f.name}>
+                <label htmlFor={f.name} className="mono">
+                  <span className="accent">{String(i + 1).padStart(2, '0')}</span> {f.label}
+                </label>
+                {f.textarea ? (
+                  <textarea id={f.name} name={f.name} rows={4} required placeholder={f.placeholder} />
+                ) : (
+                  <input id={f.name} name={f.name} type={f.type} required placeholder={f.placeholder} autoComplete={f.autoComplete} />
+                )}
+              </div>
+            ))}
+            <div className="form__foot">
+              <AnimatePresence mode="wait">
+                {(status === 'sent' || status === 'error') && (
+                  <motion.p
+                    key={status}
+                    className={`form__status mono ${status === 'sent' ? 'accent' : 'error'}`}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: easeOut }}
+                    role="status"
+                  >
+                    {status === 'sent' ? '✓ Message sent. I will get back to you soon.' : '✕ Something went wrong. Please email me directly.'}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+              <Magnetic>
+                <button type="submit" className="send" disabled={status === 'sending'} data-cursor="Send">
+                  <span>{status === 'sending' ? 'Sending…' : 'Send'}</span>
+                  <span className="send__arrow">↗</span>
+                </button>
+              </Magnetic>
+            </div>
+          </form>
+        </FadeUp>
       </div>
     </section>
   );
-};
-
-export default Contact; 
+}
