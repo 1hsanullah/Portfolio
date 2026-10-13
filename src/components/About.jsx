@@ -1,82 +1,101 @@
-import AnimatedSection from './AnimatedSection';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import profileImg from '../assets/profile_img.jpg';
+import { about, profile, stats } from '../data/content';
+import AsciiPortrait from './AsciiPortrait';
+import Counter from './ui/Counter';
+import { FadeUp } from './ui/Reveal';
+import SectionHead from './ui/SectionHead';
 
-const About = () => {
+const Word = ({ children, progress, range }) => {
+  const opacity = useTransform(progress, range, [0.14, 1]);
   return (
-    <section id="about" className="relative section-spacing">
-      <div className="absolute inset-0 bg-gradient-to-br from-white via-apple-gray-50 to-white dark:from-apple-gray-900 dark:via-apple-gray-800 dark:to-apple-gray-900"></div>
-      
-      <div className="relative container mx-auto max-w-4xl container-padding">
-        <AnimatedSection>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-              <span className="gradient-text">About Me</span>
-            </h2>
-          </motion.div>
-          
-          <div className="glass-morphism rounded-3xl p-12 card-hover">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="space-y-8"
-            >
-              <p className="text-xl lg:text-2xl text-apple-gray-700 dark:text-apple-gray-200 leading-relaxed text-center">
-                I'm a passionate <span className="font-semibold text-apple-blue">Software Engineer</span> with a strong foundation in modern technologies.
-                My journey in software development began with a curiosity for how things work,
-                which grew into a career focused on building efficient and scalable applications.
-              </p>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                className="pt-8 border-t border-apple-gray-200 dark:border-apple-gray-700"
-              >
-                <p className="text-xl text-apple-gray-600 dark:text-apple-gray-300 leading-relaxed text-center">
-                  When I'm not coding, I enjoy learning about emerging technologies, optimizing systems, 
-                  and refining my skills through hands-on projects. I believe in continuous learning and 
-                  staying at the forefront of technological innovation.
-                </p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                className="flex justify-center pt-8"
-              >
-                <div className="flex flex-wrap justify-center gap-4">
-                  {['Problem Solving', 'Team Collaboration', 'Innovation', 'Continuous Learning'].map((skill, index) => (
-                    <motion.span
-                      key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="px-6 py-3 bg-apple-blue/10 text-apple-blue rounded-full font-medium"
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
+    <span className="word">
+      <motion.span style={{ opacity }}>{children}</motion.span>{' '}
+    </span>
   );
 };
 
-export default About; 
+// Words light up one by one as the paragraph scrolls through the viewport.
+function ScrollParagraph({ text }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] });
+  const words = text.split(' ');
+  return (
+    <p ref={ref} className="about__lead">
+      {words.map((w, i) => (
+        <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
+          {w}
+        </Word>
+      ))}
+    </p>
+  );
+}
+
+export default function About() {
+  return (
+    <section id="about" className="section about">
+      <SectionHead index="01" label="About" meta={profile.location} />
+
+      <div className="about__grid">
+        <FadeUp className="about__side">
+          <div className="about__card">
+            <AsciiPortrait src={profileImg} alt={`Portrait of ${profile.name}`} />
+            <dl className="about__whoami mono">
+              <div>
+                <dt>name</dt>
+                <dd>{profile.name}</dd>
+              </div>
+              <div>
+                <dt>role</dt>
+                <dd>{profile.role}</dd>
+              </div>
+              <div>
+                <dt>based</dt>
+                <dd>{profile.location}</dd>
+              </div>
+              <div>
+                <dt>status</dt>
+                <dd>
+                  <span className="dot-live" />
+                  open to work
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <div className="about__caption mono muted">fig. 01 · move through it</div>
+        </FadeUp>
+
+        <div className="about__text">
+          <ScrollParagraph text={about.lead} />
+          <div className="about__body">
+            {about.body.map((p, i) => (
+              <FadeUp key={i} delay={i * 0.1}>
+                <p>{p}</p>
+              </FadeUp>
+            ))}
+          </div>
+          <FadeUp className="about__traits mono">
+            {about.traits.map((t, i) => (
+              <span key={t}>
+                <span className="accent">{String(i + 1).padStart(2, '0')}</span> {t}
+              </span>
+            ))}
+          </FadeUp>
+        </div>
+      </div>
+
+      <div className="stats">
+        {stats.map((s, i) => (
+          <FadeUp key={s.label} className="stat" delay={(i % 3) * 0.08}>
+            <div className="stat__value">
+              {s.text ? <span>{s.text}</span> : <Counter value={s.value} decimals={s.decimals} suffix={s.suffix} />}
+            </div>
+            <div className="stat__label mono">{s.label}</div>
+            <div className="stat__note muted">{s.note}</div>
+          </FadeUp>
+        ))}
+      </div>
+    </section>
+  );
+}
