@@ -2,7 +2,7 @@
 
 Personal portfolio of a London-based software engineer, designed as an "engineering terminal meets editorial" site: big Swiss-style type, a live ASCII render engine, and a shell you can actually type into.
 
-[View live website](https://portfolio-alpha-lime-62.vercel.app/)
+[ihsanullah.is-a.dev](https://ihsanullah.is-a.dev)
 
 ## Highlights
 
